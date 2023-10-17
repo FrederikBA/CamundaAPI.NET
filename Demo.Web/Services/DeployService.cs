@@ -20,15 +20,23 @@ public class DeployService
         var multipartFormDataContent = new MultipartFormDataContent();
         var byteArrayContent = new ByteArrayContent(file);
         byteArrayContent.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
-        multipartFormDataContent.Add(byteArrayContent, "data", "Demo.Bpmn.bpmn");
+        multipartFormDataContent.Add(byteArrayContent, "data", "ApiDemo.bpmn");
 
         _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         _httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.ASCII.GetBytes("demo:demo")));
         var response = await _httpClient.PostAsync(url, multipartFormDataContent);
-        var content = await response.Content.ReadAsStringAsync();
-        return content;
+        var result = await response.Content.ReadAsStringAsync();
+        return result;
     }
 
+    public async Task<string> DeleteDeployment(string id)
+    {
+        var url = $"http://localhost:8080/engine-rest/deployment/{id}?cascade=true";
+        var response = await _httpClient.DeleteAsync(url);
+        var result = await response.Content.ReadAsStringAsync();
+        return result;
+    }
+    
     private string GetFilePath()
     {
         var currentDirectory = Directory.GetCurrentDirectory();

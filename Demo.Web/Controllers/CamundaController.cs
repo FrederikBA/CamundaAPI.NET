@@ -1,3 +1,4 @@
+using Demo.Web.Models.Dto;
 using Demo.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,12 +18,21 @@ public class CamundaController : ControllerBase
     }
     
     [HttpPost]
-    [Route("deploy")]
+    [Route("deployment/deploy")]
     public async Task<IActionResult> DeployCamunda()
     {
         var response = await _deployService.Deploy();
         return Ok(response);
     }
+    
+    [HttpPost]
+    [Route("deployment/delete")]
+    public async Task<IActionResult> DeleteCamundaDeployment([FromBody] DeleteDeploymentDto dto)
+    {
+        var response = await _deployService.DeleteDeployment(dto.Id);
+        return Ok(response);
+    }
+
     
     [HttpPost]
     [Route("process/start")]

@@ -15,7 +15,7 @@ public class ProcessService
 
     public async Task<string> StartCamundaProcess()
     {
-        var dto = new ProcessDTO();
+        var dto = new ProcessDto();
         var json = JsonSerializer.Serialize(dto);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
         
