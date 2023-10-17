@@ -10,11 +10,13 @@ public class CamundaController : ControllerBase
 {
     private readonly DeployService _deployService;
     private readonly ProcessService _processService;
+    private readonly TaskService _taskService;
 
-    public CamundaController(DeployService deployService, ProcessService processService)
+    public CamundaController(DeployService deployService, ProcessService processService, TaskService taskService)
     {
         _deployService = deployService;
         _processService = processService;
+        _taskService = taskService;
     }
     
     [HttpPost]
