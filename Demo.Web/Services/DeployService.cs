@@ -5,11 +5,11 @@ namespace Demo.Web.Services;
 
 public class DeployService
 {
-    private readonly IWebHostEnvironment _environment;
+    private readonly HttpClient _httpClient;
 
-    public DeployService(IWebHostEnvironment environment)
+    public DeployService()
     {
-        _environment = environment;
+        _httpClient = new HttpClient();
     }
 
     public async Task<string> Deploy()
@@ -22,10 +22,9 @@ public class DeployService
         byteArrayContent.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
         multipartFormDataContent.Add(byteArrayContent, "data", "Demo.Bpmn.bpmn");
 
-        var httpClient = new HttpClient();
-        httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.ASCII.GetBytes("demo:demo")));
-        var response = await httpClient.PostAsync(url, multipartFormDataContent);
+        _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        _httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.ASCII.GetBytes("demo:demo")));
+        var response = await _httpClient.PostAsync(url, multipartFormDataContent);
         var content = await response.Content.ReadAsStringAsync();
         return content;
     }
