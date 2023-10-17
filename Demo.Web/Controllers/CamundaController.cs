@@ -19,6 +19,6 @@ public class CamundaController : ControllerBase
     public async Task<IActionResult> DeployCamunda()
     {
         var result = await _deployService.Deploy();
-        return Ok("Hello World!");
+        return Ok(result);
     }
 }
