@@ -29,7 +29,7 @@ public class CamundaController : ControllerBase
     
     [HttpPost]
     [Route("deployment/delete")]
-    public async Task<IActionResult> DeleteCamundaDeployment([FromBody] DeleteDeploymentDto dto)
+    public async Task<IActionResult> DeleteCamundaDeployment([FromBody] DeploymentDto dto)
     {
         var response = await _deployService.DeleteDeployment(dto.id);
         return Ok(response);
