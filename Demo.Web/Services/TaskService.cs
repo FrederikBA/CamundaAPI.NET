@@ -32,21 +32,17 @@ public class TaskService
         return task;
     }
     
-    public async Task CompleteTeamTask(string id, string teamName)
+    public async Task CompletePickTeamTask(string id, CompleteTaskDto dto)
     {
         var url = $"http://localhost:8080/engine-rest/task/{id}/complete";
-        
-        var dto = new CompleteTaskDto
-        {
-            Variables = new Dictionary<string, Dictionary<string, object>>
-            {
-                { "teamName", new Dictionary<string, object> { { "value", teamName } } }
-            }
-        };
         var dtoJson = JsonSerializer.Serialize(dto);
-
         var content = new StringContent(dtoJson, Encoding.UTF8, "application/json");
-        
         await _httpClient.PostAsync(url, content);
+    }
+    
+    public async Task CompleteWatchGameTask(string id)
+    {
+        var url = $"http://localhost:8080/engine-rest/task/{id}/complete";
+        await _httpClient.PostAsync(url, null);
     }
 }

@@ -19,9 +19,16 @@ public class ProcessService
         var dto = new ProcessDto();
         var json = JsonSerializer.Serialize(dto);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
-        
+
         var response = await _httpClient.PostAsync(url, content);
-        var result = await response.Content.ReadAsStringAsync();
-        return result;
+
+        if (response.IsSuccessStatusCode)
+        {
+            return "Process started successfully.";
+        }
+        else
+        {
+            return "Process failed to start.";
+        }
     }
 }
