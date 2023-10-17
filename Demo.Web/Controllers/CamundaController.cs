@@ -19,9 +19,9 @@ public class CamundaController : ControllerBase
     
     [HttpPost]
     [Route("deployment/deploy")]
-    public async Task<IActionResult> DeployCamunda()
+    public async Task<IActionResult> DeployCamunda([FromBody] DeploymentDto dto)
     {
-        var response = await _deployService.Deploy();
+        var response = await _deployService.Deploy(dto.name);
         return Ok(response);
     }
     
@@ -29,7 +29,15 @@ public class CamundaController : ControllerBase
     [Route("deployment/delete")]
     public async Task<IActionResult> DeleteCamundaDeployment([FromBody] DeleteDeploymentDto dto)
     {
-        var response = await _deployService.DeleteDeployment(dto.Id);
+        var response = await _deployService.DeleteDeployment(dto.id);
+        return Ok(response);
+    }
+    
+    [HttpGet]
+    [Route("deployment/list")]
+    public async Task<IActionResult> GetCamundaDeployments()
+    {
+        var response = await _deployService.GetDeployments();
         return Ok(response);
     }
 
