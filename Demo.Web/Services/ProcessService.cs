@@ -24,4 +24,13 @@ public class ProcessService
 
         return response.IsSuccessStatusCode ? "Process started successfully." : "Process failed to start.";
     }
+    
+    public async Task<List<ProcessDto>> GetProcesses()
+    {
+        const string url = $"http://localhost:8080/engine-rest/process-instance";
+        var response = await _httpClient.GetAsync(url);
+        var result = await response.Content.ReadAsStringAsync();
+        var processes = JsonSerializer.Deserialize<List<ProcessDto>>(result);
+        return processes ?? throw new InvalidOperationException();
+    }
 }

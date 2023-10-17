@@ -2,12 +2,8 @@ using System.Text.Json.Serialization;
 
 namespace Demo.Web.Models.Dto;
 
-public class ProcessDto
+public class ProcessDto : BaseDto
 {
-    [JsonPropertyName("processKey")]
-    public string ProcessKey { get; set; }
-    
-    public ProcessDto()
-    {
-    }
+    [JsonPropertyName("ended")]
+    public bool? Ended { get; set; }
 }

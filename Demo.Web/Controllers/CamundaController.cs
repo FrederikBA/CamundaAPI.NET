@@ -46,9 +46,17 @@ public class CamundaController : ControllerBase
 
     [HttpPost]
     [Route("process/start")]
-    public async Task<IActionResult> StartCamundaProcess([FromBody] ProcessDto dto)
+    public async Task<IActionResult> StartCamundaProcess([FromBody] StartProcessDto dto)
     {
         var response = await _processService.StartCamundaProcess(dto.ProcessKey);
+        return Ok(response);
+    }
+    
+    [HttpGet]
+    [Route("process/list")]
+    public async Task<IActionResult> GetCamundaProcesses()
+    {
+        var response = await _processService.GetProcesses();
         return Ok(response);
     }
 
