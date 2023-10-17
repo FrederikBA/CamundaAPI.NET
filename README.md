@@ -1,4 +1,4 @@
-# CamundaApiDemo
+# Camunda API Demo Application
 
 Demo application using Camunda API with .NET 
 
