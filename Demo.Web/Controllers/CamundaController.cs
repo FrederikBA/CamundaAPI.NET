@@ -80,7 +80,7 @@ public class CamundaController : ControllerBase
     [Route("task/{id}/complete")]
     public async Task<IActionResult> CompleteCamundaTaskWithCondition(string id, [FromBody] CompleteTaskDto? dto)
     {
-        await _taskService.CompletePickTeamTask(id, dto);
-        return Ok("Task Completed");
+        var result = await _taskService.CompleteTask(id, dto);
+        return Ok(result);
     }
 }

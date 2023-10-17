@@ -32,17 +32,12 @@ public class TaskService
         return task ?? throw new InvalidOperationException();
     }
 
-    public async Task CompletePickTeamTask(string id, CompleteTaskDto dto)
+    public async Task<string> CompleteTask(string id, CompleteTaskDto dto)
     {
         var url = $"http://localhost:8080/engine-rest/task/{id}/complete";
         var dtoJson = JsonSerializer.Serialize(dto);
         var content = new StringContent(dtoJson, Encoding.UTF8, "application/json");
-        await _httpClient.PostAsync(url, content);
-    }
-
-    public async Task CompleteWatchGameTask(string id)
-    {
-        var url = $"http://localhost:8080/engine-rest/task/{id}/complete";
-        await _httpClient.PostAsync(url, null);
+        var response = await _httpClient.PostAsync(url, content);
+        return response.IsSuccessStatusCode ? "Task completed successfully." : "Task failed to complete.";
     }
 }
