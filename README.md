@@ -6,4 +6,5 @@ Demo application using Camunda API with .NET
 
 
 ## API Documentation
-(https://github.com/FrederikBA/CamundaApiDemo/blob/main/docs/swagger.png)
+![Swagger](https://github.com/FrederikBA/CamundaApiDemo/blob/main/docs/swagger.png)
+
