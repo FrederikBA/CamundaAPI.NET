@@ -51,4 +51,20 @@ public class CamundaController : ControllerBase
         var response = await _processService.StartCamundaProcess(dto.ProcessKey);
         return Ok(response);
     }
+    
+    [HttpGet]
+    [Route("task/{id}")]
+    public async Task<IActionResult> GetCamundaTask(string id)
+    {
+        var response = await _taskService.GetTask(id);
+        return Ok(response);
+    }
+    
+    [HttpGet]
+    [Route("tasks")]
+    public async Task<IActionResult> GetCamundaTasks()
+    {
+        var response = await _taskService.GetTasks();
+        return Ok(response);
+    }
 }
