@@ -22,13 +22,6 @@ public class ProcessService
 
         var response = await _httpClient.PostAsync(url, content);
 
-        if (response.IsSuccessStatusCode)
-        {
-            return "Process started successfully.";
-        }
-        else
-        {
-            return "Process failed to start.";
-        }
+        return response.IsSuccessStatusCode ? "Process started successfully." : "Process failed to start.";
     }
 }
