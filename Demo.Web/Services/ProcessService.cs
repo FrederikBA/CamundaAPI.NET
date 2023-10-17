@@ -13,13 +13,13 @@ public class ProcessService
         _httpClient = new HttpClient();
     }
 
-    public async Task<string> StartCamundaProcess()
+    public async Task<string> StartCamundaProcess(string processKey)
     {
         var dto = new ProcessDto();
         var json = JsonSerializer.Serialize(dto);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
         
-        var response = await _httpClient.PostAsync(GetProcessUrl("ApiDemo"), content);
+        var response = await _httpClient.PostAsync(GetProcessUrl(processKey), content);
         var result = await response.Content.ReadAsStringAsync();
         return result;
     }
