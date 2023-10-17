@@ -14,11 +14,11 @@ public class CamundaController : ControllerBase
         _deployService = deployService;
     }
     
-    [HttpGet]
+    [HttpPost]
     [Route("deploy")]
     public async Task<IActionResult> DeployCamunda()
     {
-        await _deployService.Deploy();
-        return Ok("Deployed");
+        var response = await _deployService.Deploy();
+        return Ok(response);
     }
 }
