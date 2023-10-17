@@ -52,8 +52,6 @@ public class DeployService
         }
         else
         {
-            // Handle the error scenario here or return an appropriate default value.
-            // You can throw an exception, log an error, or return an empty list, for example.
             return new List<DeploymentDto>();
         }
     }
