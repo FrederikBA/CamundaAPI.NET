@@ -18,7 +18,7 @@ public class CamundaController : ControllerBase
     [Route("deploy")]
     public async Task<IActionResult> DeployCamunda()
     {
-        var result = await _deployService.Deploy();
-        return Ok(result);
+        await _deployService.Deploy();
+        return Ok("Deployed");
     }
 }
