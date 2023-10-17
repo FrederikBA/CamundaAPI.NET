@@ -23,7 +23,7 @@ public class CamundaController : ControllerBase
     [Route("deployment/deploy")]
     public async Task<IActionResult> DeployCamunda([FromBody] DeploymentDto dto)
     {
-        var response = await _deployService.Deploy(dto.name);
+        var response = await _deployService.Deploy(dto.Name);
         return Ok(response);
     }
     
@@ -31,7 +31,7 @@ public class CamundaController : ControllerBase
     [Route("deployment/delete")]
     public async Task<IActionResult> DeleteCamundaDeployment([FromBody] DeploymentDto dto)
     {
-        var response = await _deployService.DeleteDeployment(dto.id);
+        var response = await _deployService.DeleteDeployment(dto.Id);
         return Ok(response);
     }
     
@@ -48,7 +48,7 @@ public class CamundaController : ControllerBase
     [Route("process/start")]
     public async Task<IActionResult> StartCamundaProcess([FromBody] ProcessDto dto)
     {
-        var response = await _processService.StartCamundaProcess(dto.processKey);
+        var response = await _processService.StartCamundaProcess(dto.ProcessKey);
         return Ok(response);
     }
 }

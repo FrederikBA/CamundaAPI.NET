@@ -1,7 +1,10 @@
+using System.Text.Json.Serialization;
 using Demo.Web.Models.Dto;
 
 public class DeploymentDto : BaseDto
 {
-    public string? name { get; set; }
-    public string? source { get; set; }
+    [JsonPropertyName("name")]
+    public string? Name { get; set; }
+    [JsonPropertyName("source")]
+    public string? Source { get; set; }
 }

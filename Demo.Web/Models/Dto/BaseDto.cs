@@ -1,6 +1,9 @@
+using System.Text.Json.Serialization;
+
 namespace Demo.Web.Models.Dto;
 
 public class BaseDto
 {
-    public string? id { get; set; }
+    [JsonPropertyName("id")]
+    public string? Id { get; set; }
 }
