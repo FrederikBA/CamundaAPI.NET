@@ -1,3 +1,4 @@
+using System.Text;
 using System.Text.Json;
 using Demo.Web.Models.Dto;
 
@@ -29,5 +30,23 @@ public class TaskService
         var result = await response.Content.ReadAsStringAsync();
         var task = JsonSerializer.Deserialize<TaskDto>(result);
         return task;
+    }
+    
+    public async Task CompleteTeamTask(string id, string teamName)
+    {
+        var url = $"http://localhost:8080/engine-rest/task/{id}/complete";
+        
+        var dto = new CompleteTaskDto
+        {
+            Variables = new Dictionary<string, Dictionary<string, object>>
+            {
+                { "teamName", new Dictionary<string, object> { { "value", teamName } } }
+            }
+        };
+        var dtoJson = JsonSerializer.Serialize(dto);
+
+        var content = new StringContent(dtoJson, Encoding.UTF8, "application/json");
+        
+        await _httpClient.PostAsync(url, content);
     }
 }

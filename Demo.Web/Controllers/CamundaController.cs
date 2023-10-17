@@ -18,7 +18,7 @@ public class CamundaController : ControllerBase
         _processService = processService;
         _taskService = taskService;
     }
-    
+
     [HttpPost]
     [Route("deployment/deploy")]
     public async Task<IActionResult> DeployCamunda([FromBody] DeploymentDto dto)
@@ -26,7 +26,7 @@ public class CamundaController : ControllerBase
         var response = await _deployService.Deploy(dto.Name);
         return Ok(response);
     }
-    
+
     [HttpPost]
     [Route("deployment/delete")]
     public async Task<IActionResult> DeleteCamundaDeployment([FromBody] DeploymentDto dto)
@@ -34,7 +34,7 @@ public class CamundaController : ControllerBase
         var response = await _deployService.DeleteDeployment(dto.Id);
         return Ok(response);
     }
-    
+
     [HttpGet]
     [Route("deployment/list")]
     public async Task<IActionResult> GetCamundaDeployments()
@@ -43,7 +43,7 @@ public class CamundaController : ControllerBase
         return Ok(response);
     }
 
-    
+
     [HttpPost]
     [Route("process/start")]
     public async Task<IActionResult> StartCamundaProcess([FromBody] ProcessDto dto)
@@ -51,7 +51,7 @@ public class CamundaController : ControllerBase
         var response = await _processService.StartCamundaProcess(dto.ProcessKey);
         return Ok(response);
     }
-    
+
     [HttpGet]
     [Route("task/{id}")]
     public async Task<IActionResult> GetCamundaTask(string id)
@@ -59,12 +59,20 @@ public class CamundaController : ControllerBase
         var response = await _taskService.GetTask(id);
         return Ok(response);
     }
-    
+
     [HttpGet]
     [Route("tasks")]
     public async Task<IActionResult> GetCamundaTasks()
     {
         var response = await _taskService.GetTasks();
         return Ok(response);
+    }
+
+    [HttpPost]
+    [Route("task/{id}/complete")]
+    public async Task<IActionResult> CompleteCamundaTask(string id, [FromBody] CompleteTaskDto dto)
+    {
+        await _taskService.CompleteTeamTask(id, dto.Variables["teamName"]["value"].ToString());
+        return Ok("Task Completed");
     }
 }
